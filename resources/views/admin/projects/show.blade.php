@@ -1,0 +1,35 @@
+@extends('layouts.app')
+
+@section('content')
+  <h1 class="text-center my-4">Details for the project: {{ $project->name }}</h1>
+
+  <div class="container">
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{ $project->cover_image }}" class="img-fluid rounded-start"
+            alt="{{ $project->name }}">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ $project->name }}</h5>
+            <h5 class="card-title">{{ $project->client_name }}</h5>
+            <p class="card-text">{{ $project->summary }}</p>
+            <div class="actions d-flex">
+              <a href="{{ route('admin.project.edit', $project) }}" class="btn btn-primary">Edit this
+                project</a>
+              <form action="{{ route('admin.project.destroy', $project) }}" method="POST"
+                onclick="return confirm('Do you really want to delete this project?')">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger" type="submit">Delete this project</button>
+              </form>
+              <a href="{{ route('admin.project.index') }}" class="btn btn-info">Back to all
+                projects</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection

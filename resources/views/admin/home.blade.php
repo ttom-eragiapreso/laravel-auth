@@ -16,6 +16,9 @@
             <p>You are logged in, {{ Auth::user()->name }}</p>
             <p>Your email is: {{ Auth::user()->email }}</p>
             <p>Your encrypted password is: {{ Auth::user()->password }}</p>
+            <p>Click <a href="{{ route('admin.project.index') }}">here</a> to look at your projects, or
+              <a href="{{ route('admin.project.create') }}">here</a>
+              to create a new one</p>
           </div>
         </div>
       </div>

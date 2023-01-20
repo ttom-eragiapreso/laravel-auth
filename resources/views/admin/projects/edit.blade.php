@@ -18,11 +18,13 @@
       {{-- Project cover image --}}
       <div class="mb-3">
         <label for="cover_image" class="form-label fw-bold">Cover Image</label>
-        <input type="file" name="cover_image" class="form-control" id="cover_image">
+        <input onchange="showImage(event)" type="file" name="cover_image" class="form-control"
+          id="cover_image">
       </div>
       @if ($project->cover_image)
         <div>
-          <img src="{{ asset('storage/' . $project->cover_image) }}" alt="" width="150">
+          <img src="{{ asset('storage/' . $project->cover_image) }}" alt="" width="150"
+            id="uploaded_image">
         </div>
       @endif
       {{-- Project client name --}}
@@ -41,4 +43,11 @@
       <button class="btn btn-info" type="submit">Salva</button>
     </form>
   </div>
+  <script>
+    function showImage(event) {
+      console.log(event)
+      const thumb = document.getElementById('uploaded_image');
+      thumb.src = URL.createObjectURL(event.target.files[0]);
+    }
+  </script>
 @endsection

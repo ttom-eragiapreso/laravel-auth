@@ -97,6 +97,17 @@ class ProjectsController extends Controller
     {
         $form_data = $request->all();
 
+        if(array_key_exists('cover_image', $form_data)){
+
+            if($project->cover_image){
+                Storage::disk('public')->delete($project->cover_image);
+            }
+
+            $form_data['original_cover_image_name'] = $request->file('cover_image')->getClientOriginalName();
+            $form_data['cover_image'] = Storage::put('uploads', $form_data['cover_image']);
+
+        }
+
         if($form_data['name'] != $project->name ){
             $form_data['slug'] = Project::generateSlug($form_data['name']);
         }else {

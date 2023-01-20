@@ -24,7 +24,6 @@ class ProjectSeeder extends Seeder
             $new_project->slug = Project::generateSlug($new_project->name);
             $new_project->client_name = $faker->name();
             $new_project->summary = $faker->paragraph();
-            $new_project->cover_image = 'https://www.innerintegratori.it/wp-content/uploads/2021/06/placeholder-image-600x450.png';
 
             $new_project->save();
         }

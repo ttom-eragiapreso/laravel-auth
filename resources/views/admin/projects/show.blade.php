@@ -7,11 +7,12 @@
     <div class="card mb-3">
       <div class="row g-0">
         <div class="col-md-4">
-          <img src="{{ $project->cover_image }}" class="img-fluid rounded-start"
+          <img src="{{ asset('storage/' . $project->cover_image) }}" class="img-fluid rounded-start"
             alt="{{ $project->name }}">
         </div>
         <div class="col-md-8">
           <div class="card-body">
+            <h6 class="card-title">{{ $project->original_cover_image_name }}</h6>
             <h5 class="card-title">{{ $project->name }}</h5>
             <h5 class="card-title">{{ $project->client_name }}</h5>
             <p class="card-text">{{ $project->summary }}</p>

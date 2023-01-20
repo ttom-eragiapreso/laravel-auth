@@ -10,13 +10,21 @@
         @endforeach
       </ul>
     @endif
-    <form action="{{ route('admin.project.store') }}" method="POST">
+    <form action="{{ route('admin.project.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
 
       <div class="mb-3">
         <label for="name" class="form-label fw-bold">Project Name</label>
         <input type="text" name="name" class="form-control" id="name"
           placeholder="The name of your project" value="{{ old('name') }}">
+      </div>
+      <div class="mb-3">
+        <label for="cover_image" class="form-label fw-bold">Project Cover Image</label>
+        <input type="file" onchange="showImage(event)" name="cover_image" class="form-control"
+          id="cover_image">
+      </div>
+      <div>
+        <img src="" width="150" alt="" id="uploaded_image">
       </div>
       <div class="mb-3">
         <label for="client_name" class="form-label fw-bold">Project Client Name</label>
@@ -33,4 +41,12 @@
       <button class="btn btn-info">Salva</button>
     </form>
   </div>
+
+  <script>
+    function showImage(event) {
+      console.log(event)
+      const thumb = document.getElementById('uploaded_image');
+      thumb.src = URL.createObjectURL(event.target.files[0]);
+    }
+  </script>
 @endsection

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <h1>Edit the project details</h1>
+  <h1 class="text-center my-5">Edit the project details</h1>
 
   <div class="container">
     <form action="{{ route('admin.project.update', $project) }}" method="POST">
@@ -13,6 +13,15 @@
         <input type="text" name="name" class="form-control" id="name"
           placeholder="The name of your project" value="{{ $project->name }}">
       </div>
+      <div class="mb-3">
+        <label for="cover_image" class="form-label fw-bold">Project Name</label>
+        <input type="file" name="cover_image" class="form-control" id="cover_image">
+      </div>
+      @if ($project->cover_image)
+        <div>
+          <img src="{{ asset('storage/' . $project->cover_image) }}" alt="" width="150">
+        </div>
+      @endif
       <div class="mb-3">
         <label for="client_name" class="form-label fw-bold">Project Client Name</label>
         <input id="client_name" type="text" name="client_name" class="form-control"

@@ -54,12 +54,6 @@ class ProjectsController extends Controller
 
         Project::create($form_data);
 
-        // $new_project = new Project();
-
-
-        // $new_project->fill($form_data);
-
-        // $new_project->save();
 
         return redirect()->route('admin.project.index');
     }
@@ -99,7 +93,13 @@ class ProjectsController extends Controller
 
         if(array_key_exists('cover_image', $form_data)){
 
-            if($project->cover_image){
+        /* isset => se esiste
+         * is_null => se è null => !is_null
+         * is_empty => se è vuoto
+         *
+         */
+
+            if(isset($project->cover_image)){
                 Storage::disk('public')->delete($project->cover_image);
             }
 
@@ -128,12 +128,15 @@ class ProjectsController extends Controller
     public function destroy(Project $project)
     {
 
-        if(!$project->cover_image){
+        // dump($project->cover_image);
+        // die;
+
+        if(!is_null($project->cover_image)){
             Storage::disk('public')->delete($project->cover_image);
         }
 
         $project->delete();
 
-        return redirect()->route('admin.project.index')->with('deleted', "You successful deleted $project->name");
+        return redirect()->route('admin.project.index')->with('deleted', "You successfully deleted $project->name");
     }
 }
